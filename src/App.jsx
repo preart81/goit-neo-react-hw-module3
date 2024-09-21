@@ -14,6 +14,11 @@ function App() {
   const addContact = newContact => {
     setContacts(prevContacts => [...prevContacts, newContact]);
   };
+  const deleteContact = id => {
+    setContacts(prevContacts =>
+      prevContacts.filter(contact => contact.id !== id)
+    );
+  };
 
   const [searchText, setSetsearchText] = useState('');
   const filter = searchText.toLowerCase().trim();
@@ -28,7 +33,10 @@ function App() {
         <h1>Phonebook</h1>
         <ContactForm addContact={addContact} />
         <SearchBox searchText={searchText} handleSearch={setSetsearchText} />
-        <ContactList contacts={filteredContacts} />
+        <ContactList
+          contacts={filteredContacts}
+          deleteContact={deleteContact}
+        />
       </div>
     </>
   );
